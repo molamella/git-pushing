@@ -78,17 +78,8 @@ fi
 
 info "Creating GitHub repository: $REPO_NAME"
 
-# Ask for visibility (public/private)
-echo ""
-read -p "Make repository public or private? [public/private] (default: public): " VISIBILITY
-VISIBILITY=${VISIBILITY:-public}
-
-# Create the repository
-if [ "$VISIBILITY" = "private" ]; then
-    VISIBILITY_FLAG="--private"
-else
-    VISIBILITY_FLAG="--public"
-fi
+# Default to public (no prompt)
+VISIBILITY_FLAG="--public"
 
 step "Creating repository on GitHub..."
 if gh repo create "$REPO_NAME" $VISIBILITY_FLAG --source=. --remote=origin; then
